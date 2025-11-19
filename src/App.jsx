@@ -80,6 +80,7 @@ function App() {
       {
         staticAll.map(item => (
           <div key={item.id}>
+            <img src={`https://image.tmdb.org/t/p/w342${item.poster_path}`} alt={item.id} />
             <p>
               {
                 item.title || item.name
@@ -95,7 +96,11 @@ function App() {
                 item.original_language === 'en' ? <img src={EnglandFlag} alt="england_flag" width='20px' /> : item.original_language
               }
             </p>
-            <p>{item.vote_average}</p>
+            <p>
+              {
+                Math.ceil(item.vote_average / 2)
+              }
+            </p>
           </div>
         ))
       }
