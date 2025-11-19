@@ -14,8 +14,7 @@ function App() {
         setFilms(res.data.results)
       })
   }
-  //do the call immediatly at the mount of the component
-  useEffect(getFilms, [])
+  // useEffect(getFilms, [])
 
 
 
@@ -34,6 +33,10 @@ function App() {
   //handle the submit to filter the films by the search input
   function handleSubmit(e) {
     e.preventDefault()
+
+    //do the call only at the form submit
+    getFilms()
+
     //link the reaserch into the searchbar to the films titles, filter the information to grab the films when the search is equal to a part of the title
     const searched = films.filter(film => film.title.toLowerCase().includes(search.toLowerCase()))
     //update staticFilms state with the filtered array
