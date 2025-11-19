@@ -48,7 +48,7 @@ function App() {
 
 
   //static array to update the state
-  // const [staticFilms, setStaticFilms] = useState(films)
+  const [staticAll, setStaticAll] = useState(allResults)
 
   //link the input change to its value
   const [search, setSearch] = useState('')
@@ -58,16 +58,16 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault()
 
-
     //link the reaserch into the searchbar to the films titles, filter the information to grab the films when the search is equal to a part of the title
     const searched = allResults.filter(result => (result.title || result.name).toLowerCase().includes(search.toLowerCase()))
-    //update staticFilms state with the filtered array
-    allResults = searched
+    //update results state with the filtered array
+    setStaticAll(searched)
 
     //when the search input is empty, update statifilms state tu empty
     if (search.length === 0) {
-      allResults = ''
+      setStaticAll([])
     }
+
   }
 
   return (
@@ -78,16 +78,24 @@ function App() {
       </form>
 
       {
-        allResults.map(film => (
-          <div key={film.id}>
-            <p>{film.title}</p>
-            <p>{film.original_title}</p>
-            <p>Language:
+        staticAll.map(item => (
+          <div key={item.id}>
+            <p>
               {
-                film.original_language === 'en' ? <img src={EnglandFlag} alt="england_flag" width='20px' /> : film.original_language
+                item.title || item.name
               }
             </p>
-            <p>{film.vote_average}</p>
+            <p>
+              {
+                item.original_title || item.original_name
+              }
+            </p>
+            <p>Language:
+              {
+                item.original_language === 'en' ? <img src={EnglandFlag} alt="england_flag" width='20px' /> : item.original_language
+              }
+            </p>
+            <p>{item.vote_average}</p>
           </div>
         ))
       }
