@@ -15,13 +15,21 @@ function App() {
 
 
   useEffect(getFilms, [])
-  console.log(films);
 
+
+
+  const [search, setSearch] = useState('')
+  console.log(search);
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    setSearch('')
+  }
 
   return (
     <>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <input type="search" />
+      <form onSubmit={handleSubmit}>
+        <input type="search" name="search" id="search" value={search} onChange={e => setSearch(e.target.value)} />
         <button type="submit">Cerca</button>
       </form>
 
