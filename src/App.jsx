@@ -17,12 +17,24 @@ function App() {
   useEffect(getFilms, [])
   console.log(films);
 
+
   return (
     <>
       <form onSubmit={(e) => e.preventDefault()}>
         <input type="search" />
         <button type="submit">Cerca</button>
       </form>
+
+      {
+        films.map(film => (
+          <div key={film.id}>
+            <p>{film.title}</p>
+            <p>{film.original_title}</p>
+            <p>{film.original_language}</p>
+            <p>{film.vote_average}</p>
+          </div>
+        ))
+      }
     </>
   )
 }
