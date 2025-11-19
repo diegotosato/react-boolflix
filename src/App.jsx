@@ -19,7 +19,10 @@ function App() {
 
   return (
     <>
-
+      <form onSubmit={(e) => e.preventDefault()}>
+        <input type="search" />
+        <button type="submit">Cerca</button>
+      </form>
     </>
   )
 }
