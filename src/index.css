@@ -3,3 +3,47 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  height: 2000px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  box-shadow: 0px 0px 10px black;
+  position: fixed;
+}
+
+h1 {
+  color: red;
+  text-transform: capitalize;
+}
+
+input {
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid red;
+  margin-right: 15px;
+}
+
+button {
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: red;
+  color: white;
+}
+
+button:hover {
+  border: 2px solid red;
+  background-color: white;
+  color: red;
+  transition: 0.3s;
+}

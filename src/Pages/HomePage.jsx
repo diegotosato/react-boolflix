@@ -14,10 +14,13 @@ export default function HomePage() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <input type="search" name="search" id="search" value={search} onChange={e => setSearch(e.target.value)} />
-                <button type="submit">Cerca</button>
-            </form>
+            <header>
+                <h1>boolflix</h1>
+                <form onSubmit={handleSubmit}>
+                    <input type="search" name="search" id="search" value={search} onChange={e => setSearch(e.target.value)} />
+                    <button type="submit">Cerca</button>
+                </form>
+            </header>
 
             {
                 staticAll.map(item => (
