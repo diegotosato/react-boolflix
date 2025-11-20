@@ -7,6 +7,9 @@ import EnglandFlag from './assets/img/flags_icons/england_flag.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
+//import country flag from react library
+import React from 'react';
+import ReactCountryFlag from 'react-country-flag';
 
 
 function App() {
@@ -78,6 +81,16 @@ function App() {
 
 
 
+
+  //function to return the english flag
+  function englishFlag() {
+    return (
+      <ReactCountryFlag countryCode="IT" style={{ fontSize: '3em', lineHeight: '3em' }} />
+    )
+
+  }
+
+
   //function to create the stars, pass the average lika a parameter
   function printStars(vote) {
 
@@ -94,7 +107,7 @@ function App() {
 
       //at cycle ZERO valutation is 1, average is keep from film average, in that case is 4 => 1 < 4 => fill the array with one icon
       if (valutation[i] <= vote) {
-        stars.push(<FontAwesomeIcon key={i} icon={faStar} />)
+        stars.push(<FontAwesomeIcon key={i} icon={faStar} style={{ color: "goldenrod" }} />)
       }
 
     }
@@ -132,7 +145,9 @@ function App() {
 
             <p>Language:
               {
-                item.original_language === 'en' ? <img src={EnglandFlag} alt="england_flag" width='20px' /> : item.original_language
+                item.original_language === 'en' ?
+                  <ReactCountryFlag countryCode="SH" svg style={{ width: "20px", height: "20px" }} title="Italia" /> :
+                  item.original_language
               }
             </p>
 
