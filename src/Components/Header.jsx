@@ -10,7 +10,10 @@ export default function Header() {
     return (
         <>
             <header>
-                <h1>boolflix</h1>
+                <a href="../App.jsx">
+                    <h1>boolflix</h1>
+                </a>
+
                 <form onSubmit={handleSubmit}>
                     <input type="search" name="search" id="search" value={search} onChange={e => setSearch(e.target.value)} placeholder='Cerca film/serie TV' />
                     <button type="submit">Cerca</button>
