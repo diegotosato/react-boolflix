@@ -56,11 +56,16 @@ export default function HomePage() {
                                         }
                                         </p>
 
-                                        <p className='rating'>
+                                        <p className='rating'>Voto: {
+                                            printStars(Math.ceil(item.vote_average / 2))
+                                        }
                                             {/* invoke the function to print stars, pass the average like parameter */}
                                             {/* avarage is round up to the nearest number (9.401 => 10), and divide by 2 to obtain votes between 1 and 5 */}
+                                        </p>
+
+                                        <p className='overview'>
                                             {
-                                                printStars(Math.ceil(item.vote_average / 2))
+                                                item.overview
                                             }
                                         </p>
 

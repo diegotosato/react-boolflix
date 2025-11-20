@@ -126,8 +126,13 @@ main {
   display: flex;
   align-items: center;
   gap: 5px;
+  margin-top: 20px;
 }
 
 .rating {
-  margin-top: 10px;
+  margin-top: 20px;
+}
+
+.overview {
+  margin-top: 20px;
 }
