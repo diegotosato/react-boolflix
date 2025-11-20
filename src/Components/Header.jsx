@@ -10,7 +10,7 @@ export default function Header() {
     return (
         <>
             <header>
-                <a href="../App.jsx">
+                <a href="../Pages/HomePage.jsx">
                     <h1>boolflix</h1>
                 </a>
 
