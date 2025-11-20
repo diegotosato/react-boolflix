@@ -2,6 +2,9 @@
 import React from 'react';
 import ReactCountryFlag from 'react-country-flag';
 
+//import header component
+import Header from '../Components/Header';
+
 
 
 //import custom hook
@@ -10,17 +13,11 @@ import { useCustom } from '../Context.jsx/CustomContext';
 export default function HomePage() {
 
     //be available custom context variables
-    const { staticAll, search, setSearch, handleSubmit, printStars } = useCustom()
+    const { staticAll, printStars } = useCustom()
 
     return (
         <>
-            <header>
-                <h1>boolflix</h1>
-                <form onSubmit={handleSubmit}>
-                    <input type="search" name="search" id="search" value={search} onChange={e => setSearch(e.target.value)} />
-                    <button type="submit">Cerca</button>
-                </form>
-            </header>
+            <Header />
 
             {
                 staticAll.map(item => (
