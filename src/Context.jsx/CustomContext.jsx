@@ -4,7 +4,8 @@ import axios, { all } from "axios"
 
 //import FontAwesome and the Star Icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarSolid } from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 
 //customProvider
 function CustomProvider({ children }) {
@@ -29,7 +30,7 @@ function CustomProvider({ children }) {
     const [series, setSeries] = useState([])
     //AJAX CALL to get the films and set the variable state
     function getSeries() {
-        axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${apiUrl}&query=breaking+bad`)
+        axios.get(`https://api.themoviedb.org/3/search/tv?api_key=${apiUrl}&query=${search}`)
             .then(res => {
                 setSeries(res.data.results)
             })
@@ -95,7 +96,9 @@ function CustomProvider({ children }) {
 
             //at cycle ZERO valutation is 1, average is keep from film average, in that case is 4 => 1 < 4 => fill the array with one icon
             if (valutation[i] <= vote) {
-                stars.push(<FontAwesomeIcon key={i} icon={faStar} style={{ color: "goldenrod" }} />)
+                stars.push(<FontAwesomeIcon key={i} icon={faStarSolid} style={{ color: "goldenrod" }} />)
+            } else {
+                stars.push(<FontAwesomeIcon key={i} icon={faStarRegular} style={{ color: "goldenrod" }} />)
             }
 
         }
