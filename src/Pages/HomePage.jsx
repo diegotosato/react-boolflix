@@ -19,44 +19,65 @@ export default function HomePage() {
         <>
             <Header />
 
-            {
-                staticAll.map(item => (
+            <main>
 
-                    <div key={item.id}>
+                <div className="container">
 
-                        {/* first part of the URL is the same, second part is object key poster_path */}
-                        <img src={`https://image.tmdb.org/t/p/w342${item.poster_path}`} alt={item.id} />
+                    <div className="row">
 
-                        <p>
-                            {
-                                item.title || item.name
-                            }
-                        </p>
+                        {
+                            staticAll.map(item => (
 
-                        <p>
-                            {
-                                item.original_title || item.original_name
-                            }
-                        </p>
+                                <div key={item.id} className='card'>
 
-                        <p>Language:
-                            {
-                                item.original_language === 'en' ?
-                                    <ReactCountryFlag countryCode="SH" svg style={{ width: "20px", height: "20px" }} title="Italia" /> :
-                                    item.original_language
-                            }
-                        </p>
+                                    {/* first part of the URL is the same, second part is object key poster_path */}
+                                    <img src={`https://image.tmdb.org/t/p/w342${item.poster_path}`} alt={item.id} />
 
-                        <p>
-                            {/* invoke the function to print stars, pass the average like parameter */}
-                            {/* avarage is round up to the nearest number (9.401 => 10), and divide by 2 to obtain votes between 1 and 5 */}
-                            {
-                                printStars(Math.ceil(item.vote_average / 2))
-                            }
-                        </p>
+                                    <div className="details">
+
+                                        <p>Title: <span className='title'>
+                                            {
+                                                item.title || item.name
+                                            }
+                                        </span>
+                                        </p>
+
+                                        <p>Original Title: <span className='original-title'>
+                                            {
+                                                item.original_title || item.original_name
+                                            }
+                                        </span>
+                                        </p>
+
+                                        <p className='language'>Language: {
+                                            item.original_language === 'en' ?
+                                                <ReactCountryFlag countryCode="SH" svg style={{ width: "20px", height: "20px" }} title="Italia" /> :
+                                                item.original_language
+                                        }
+                                        </p>
+
+                                        <p className='rating'>
+                                            {/* invoke the function to print stars, pass the average like parameter */}
+                                            {/* avarage is round up to the nearest number (9.401 => 10), and divide by 2 to obtain votes between 1 and 5 */}
+                                            {
+                                                printStars(Math.ceil(item.vote_average / 2))
+                                            }
+                                        </p>
+
+                                    </div>
+                                    {/* /details */}
+
+                                </div>
+                            ))
+                        }
+
                     </div>
-                ))
-            }
+                    {/* /row */}
+
+                </div>
+                {/* /container */}
+
+            </main>
         </>
     )
 }
