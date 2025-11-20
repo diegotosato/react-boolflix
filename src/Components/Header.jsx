@@ -12,7 +12,7 @@ export default function Header() {
             <header>
                 <h1>boolflix</h1>
                 <form onSubmit={handleSubmit}>
-                    <input type="search" name="search" id="search" value={search} onChange={e => setSearch(e.target.value)} />
+                    <input type="search" name="search" id="search" value={search} onChange={e => setSearch(e.target.value)} placeholder='Cerca film/serie TV' />
                     <button type="submit">Cerca</button>
                 </form>
             </header>
