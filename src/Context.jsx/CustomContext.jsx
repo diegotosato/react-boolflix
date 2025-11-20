@@ -12,12 +12,14 @@ function CustomProvider({ children }) {
     //API KEY to get the films
     const apiUrl = import.meta.env.VITE_MOVIE_DB_API_KEY
 
+    //link the input change to its value
+    const [search, setSearch] = useState('')
 
     //state variable to contain the films
     const [films, setFilms] = useState([])
     //AJAX CALL to get the films and set the variable state
     function getFilms() {
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiUrl}&query=un+weekend+da+bamboccioni`)
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiUrl}&query=${search}`)
             .then(res => {
                 setFilms(res.data.results)
             })
@@ -41,7 +43,7 @@ function CustomProvider({ children }) {
 
     //invoke of both functions at load of the component
     useEffect(
-        () => { getFilms(), getSeries() }, []
+        () => { getFilms(), getSeries() }, [search]
     )
 
     //update allresults array only when films and series change (view at the dependance)
@@ -52,8 +54,7 @@ function CustomProvider({ children }) {
     //static array to update the state
     const [staticAll, setStaticAll] = useState(allResults)
 
-    //link the input change to its value
-    const [search, setSearch] = useState('')
+
 
 
 
