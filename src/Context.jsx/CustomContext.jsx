@@ -23,6 +23,8 @@ function CustomProvider({ children }) {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${apiUrl}&query=${search}`)
             .then(res => {
                 setFilms(res.data.results)
+                // console.log(res.data.results[0].genre_ids);
+
             })
     }
 
@@ -37,24 +39,51 @@ function CustomProvider({ children }) {
     }
 
 
+
+
+    //state variable to contain the genres
+    const [filmGenres, setFilmGenres] = useState([])
+    //AJAX CALL to get the films genres and set the variable state
+    function getFilmGenres() {
+        axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiUrl}&language=en-EN`)
+            .then(res => {
+                setFilmGenres(res.data.genres)
+            })
+    }
+
+    //state variable to contain the genres
+    const [seriesGenres, setSeriesGenres] = useState([])
+    //AJAX CALL to get the films genres and set the variable state
+    function getSeriesGenres() {
+        axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiUrl}&language=en-EN`)
+            .then(res => {
+                setSeriesGenres(res.data.genres)
+            })
+    }
+
+
+
     //single array with both endpoints results
     const [allResults, setAllResults] = useState([])
+
+    //single array with both genres results
+    const [allGenres, setAllGenres] = useState([])
 
 
 
     //invoke of both functions at load of the component
     useEffect(
-        () => { getFilms(), getSeries() }, [search]
+        () => { getFilms(), getSeries(), getFilmGenres(), getSeriesGenres() }, [search]
     )
 
     //update allresults array only when films and series change (view at the dependance)
     useEffect(() => {
-        setAllResults([...films, ...series])
+        setAllResults([...films, ...series]), setAllGenres([...filmGenres, ...seriesGenres]);
+
     }, [films, series])
 
     //static array to update the state
     const [staticAll, setStaticAll] = useState(allResults)
-
 
 
 
@@ -110,7 +139,7 @@ function CustomProvider({ children }) {
 
 
     return (
-        <CustomContext.Provider value={{ allResults, setAllResults, staticAll, setStaticAll, search, setSearch, handleSubmit, printStars }}>
+        <CustomContext.Provider value={{ allResults, setAllResults, staticAll, setStaticAll, allGenres, search, setSearch, handleSubmit, printStars }}>
             {children}
         </CustomContext.Provider>
     )

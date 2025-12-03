@@ -5,6 +5,7 @@ import ReactCountryFlag from 'react-country-flag';
 //import header component
 import Header from '../Components/Header';
 
+import { useEffect } from "react";
 
 
 //import custom hook
@@ -13,7 +14,31 @@ import { useCustom } from '../Context.jsx/CustomContext';
 export default function HomePage() {
 
     //be available custom context variables
-    const { staticAll, printStars } = useCustom()
+    const { staticAll, printStars, allGenres, films, isolateItem } = useCustom()
+
+    function generi(item) {
+        const raccolta = []
+        // const confronto = []
+        for (let i = 0; i < item.genre_ids.length; i++) {
+            const id = item.genre_ids[i];
+            // confronto.push(id)
+            // console.log(confronto);
+
+            for (let k = 0; k < allGenres.length; k++) {
+                const genre = allGenres[k];
+                // console.log(genre.id);
+
+                if (genre.id == id) {
+                    if (!raccolta.includes(genre.name)) {
+                        raccolta.push(genre.name)
+                    }
+                }
+            }
+        }
+        return raccolta.map(genere => genere + ' ')
+
+    }
+
 
     return (
         <>
@@ -63,11 +88,23 @@ export default function HomePage() {
                                             {/* avarage is round up to the nearest number (9.401 => 10), and divide by 2 to obtain votes between 1 and 5 */}
                                         </p>
 
+                                        <p className='genres'>
+                                            {
+                                                // console.log(item.genre_ids, allGenres)
+                                                <span>Generi: {generi(item)}</span>
+
+
+
+                                            }
+                                        </p>
+
                                         <p className='overview'>
                                             {
                                                 item.overview
                                             }
                                         </p>
+
+
 
                                     </div>
                                     {/* /details */}
