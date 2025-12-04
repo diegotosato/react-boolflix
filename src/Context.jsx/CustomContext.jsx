@@ -15,6 +15,9 @@ function CustomProvider({ children }) {
 
     //link the input change to its value
     const [search, setSearch] = useState('')
+    const [select, setSelect] = useState('')
+    console.log(select);
+
 
     //state variable to contain the films
     const [films, setFilms] = useState([])
@@ -169,7 +172,7 @@ function CustomProvider({ children }) {
 
 
     return (
-        <CustomContext.Provider value={{ allResults, setAllResults, staticAll, setStaticAll, allGenres, search, setSearch, handleSubmit, printStars, selectGenre }}>
+        <CustomContext.Provider value={{ allResults, setAllResults, staticAll, setStaticAll, allGenres, search, setSearch, handleSubmit, printStars, selectGenre, select, setSelect }}>
             {children}
         </CustomContext.Provider>
     )
