@@ -5,7 +5,6 @@ import ReactCountryFlag from 'react-country-flag';
 //import header component
 import Header from '../Components/Header';
 
-import { useEffect } from "react";
 
 
 //import custom hook
@@ -14,8 +13,9 @@ import { useCustom } from '../Context.jsx/CustomContext';
 export default function HomePage() {
 
     //be available custom context variables
-    const { staticAll, printStars, allGenres, films, isolateItem } = useCustom()
+    const { staticAll, printStars, allGenres } = useCustom()
 
+    //funzione per stampare nelle card i generi del film/della serie tv
     function generi(item) {
         const raccolta = []
         // const confronto = []

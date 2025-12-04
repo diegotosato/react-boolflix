@@ -71,21 +71,53 @@ function CustomProvider({ children }) {
 
 
 
+
+    //static array to inglobe the various genres of films/tv series to filter the results
+    const [selectGenre, setSelectGenre] = useState([])
+    function getOptions() {
+        Promise.all([
+            axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiUrl}&language=en-EN`),
+            axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiUrl}&language=en-EN`)
+        ])
+            .then(([filmRes, seriesRes]) => {
+                const allOptions = [...filmRes.data.genres, ...seriesRes.data.genres];
+
+                const noDoubles = []
+                const usedIds = []
+
+                for (let i = 0; i < allOptions.length; i++) {
+                    const option = allOptions[i];
+
+                    if (!usedIds.includes(option.id)) {
+                        usedIds.push(option.id)          // segna l’ID come utilizzato
+                        noDoubles.push(option)
+                    }
+                }
+
+                setSelectGenre(noDoubles)
+
+            })
+            .catch(err => console.error(err));
+    }
+
+
+
+
+    useEffect(() => { getFilmGenres(), getSeriesGenres(), getOptions() }, [])
+
+
     //invoke of both functions at load of the component
     useEffect(
-        () => { getFilms(), getSeries(), getFilmGenres(), getSeriesGenres() }, [search]
+        () => { getFilms(), getSeries() }, [search]
     )
 
     //update allresults array only when films and series change (view at the dependance)
     useEffect(() => {
-        setAllResults([...films, ...series]), setAllGenres([...filmGenres, ...seriesGenres]);
-
+        setAllResults([...films, ...series]), setAllGenres([...filmGenres, ...seriesGenres])
     }, [films, series])
 
     //static array to update the state
     const [staticAll, setStaticAll] = useState(allResults)
-
-
 
 
 
@@ -105,8 +137,6 @@ function CustomProvider({ children }) {
         }
 
     }
-
-
 
 
     //function to create the stars, pass the average lika a parameter
@@ -139,7 +169,7 @@ function CustomProvider({ children }) {
 
 
     return (
-        <CustomContext.Provider value={{ allResults, setAllResults, staticAll, setStaticAll, allGenres, search, setSearch, handleSubmit, printStars }}>
+        <CustomContext.Provider value={{ allResults, setAllResults, staticAll, setStaticAll, allGenres, search, setSearch, handleSubmit, printStars, selectGenre }}>
             {children}
         </CustomContext.Provider>
     )
